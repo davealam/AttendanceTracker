@@ -11,7 +11,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         EmployeeRepository.getInstance().loadState();
         Parent root = FXMLLoader.load(getClass().getResource("View.fxml"));
-        primaryStage.setTitle("Attendance Manager");
+        primaryStage.setTitle("AttendanceTracker");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

@@ -155,7 +155,29 @@ public class ViewController {
     }
 
     @FXML
-    public void handleAddEmployeeClick() {
+    public void handleAddEmployeeClick() throws IOException {
+
+        Dialog<ButtonType> employeeChangeDialogView = new Dialog<>();
+        employeeChangeDialogView.initOwner(givePoints.getScene().getWindow());
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("EmployeeChangeView.fxml"));
+        employeeChangeDialogView.getDialogPane().setContent(fxmlLoader.load());
+
+        employeeChangeDialogView.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        employeeChangeDialogView.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+        Optional<ButtonType> result = employeeChangeDialogView.showAndWait();
+
+        if(result.isPresent() && result.get() == ButtonType.OK) {
+
+            System.out.println("clicked okay : )");
+                        
+        } else {
+            
+            System.out.println("Cancelled");
+            
+        }
 
     }
 
