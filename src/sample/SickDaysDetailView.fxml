@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="412.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SickDaysDetailsViewController">
+  <items>
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <top>
+            <Label fx:id="employeeNameDisplay" text="Employee Detail View: Sick Days Used" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Label>
+         </top>
+         <center>
+            <TableView fx:id="paidSickDayTableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn fx:id="paidSickDaysUsedCol" prefWidth="168.0" text="Paid Sick Days Used" />
+                <TableColumn fx:id="paidDateUsedCol" prefWidth="201.0" text="Date Used" />
+                  <TableColumn fx:id="paidManagerCommentCol" prefWidth="348.0" text="Manager Notes" />
+              </columns>
+            </TableView>
+         </center>
+      </BorderPane>
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <bottom>
+            <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <items>
+                  <Button fx:id="back" mnemonicParsing="false" onAction="#handleBackClick" text="Back" />
+                <Button fx:id="editSickDay" mnemonicParsing="false" onAction="#handleEditSickDayClick" text="Edit Sick Day" />
+                  <Button fx:id="deleteSickDay" mnemonicParsing="false" onAction="#handleDeleteSickDayClick" text="Delete Sick Day" />
+              </items>
+            </ToolBar>
+         </bottom>
+         <center>
+            <TableView fx:id="unpaidSickDayTableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn fx:id="unpaidSickDaysUsedCol" prefWidth="168.0" text="Unpaid Sick Days Used" />
+                <TableColumn fx:id="unpaidDateUsedCol" prefWidth="201.0" text="Date Used" />
+                  <TableColumn fx:id="unpaidManagerCommentCol" prefWidth="348.0" text="Manager Notes" />
+              </columns>
+            </TableView>
+         </center>
+      </BorderPane>
+  </items>
+</SplitPane>
