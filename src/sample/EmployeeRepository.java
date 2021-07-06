@@ -26,43 +26,6 @@ public class EmployeeRepository implements Serializable {
 
         employeeObservableList = FXCollections.observableArrayList();
 
-        //Day shift staff list
-/*
-        Employee employee1 = new Employee("Juliana Andresen", "Jake Jensen");
-        Employee employee2 = new Employee("Braiden Candelaria", "Jake Jensen");
-        Employee employee3 = new Employee("Daniel Cronin", "Jake Jensen");
-        Employee employee4 = new Employee("Wayne Fife", "Jake Jensen");
-        Employee employee5 = new Employee("William Henwood", "Jake Jensen");
-        Employee employee6 = new Employee("Jeffery Hintze", "Jake Jensen");
-        Employee employee7 = new Employee("Manuel Janis", "Jake Jensen");
-        Employee employee8 = new Employee("Amanda Lowry", "Jake Jensen");
-        Employee employee9 = new Employee("Robby Madill", "Jake Jensen");
-        Employee employee10 = new Employee("Willie Martinez", "Jake Jensen");
-        Employee employee11 = new Employee("Brandon Maynard", "Jake Jensen");
-        Employee employee12 = new Employee("Brady parsons", "Jake Jensen");
-        Employee employee13 = new Employee("Nick Rael", "Jake Jensen");
-        Employee employee14 = new Employee("Anthony Rainer", "Jake Jensen");
-        Employee employee15 = new Employee("Kloey Willis", "Jake Jensen");
-
-
-
-        employeeObservableList.add(employee1);
-        employeeObservableList.add(employee2);
-        employeeObservableList.add(employee3);
-        employeeObservableList.add(employee4);
-        employeeObservableList.add(employee5);
-        employeeObservableList.add(employee6);
-        employeeObservableList.add(employee7);
-        employeeObservableList.add(employee8);
-        employeeObservableList.add(employee9);
-        employeeObservableList.add(employee10);
-        employeeObservableList.add(employee11);
-        employeeObservableList.add(employee12);
-        employeeObservableList.add(employee13);
-        employeeObservableList.add(employee14);
-        employeeObservableList.add(employee15);
-*/
-
     }
 
     public ObservableList<Employee> getEmployeeObservableList() {
