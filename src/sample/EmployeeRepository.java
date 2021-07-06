@@ -230,4 +230,9 @@ public class EmployeeRepository implements Serializable {
             }
         }
     }
+
+    public void addEmployee(String employeeName, String managerName) {
+        Employee employeeToAdd = new Employee(employeeName, managerName);
+        employeeObservableList.add(employeeToAdd);
+    }
 }

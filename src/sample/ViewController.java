@@ -42,6 +42,8 @@ public class ViewController {
     private MenuItem editEmployee;
     @FXML
     private MenuItem deleteEmployee;
+    @FXML
+    private MenuItem saveAndExit;
 
     public void initialize() {
         nameCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeName"));
@@ -169,10 +171,14 @@ public class ViewController {
 
         Optional<ButtonType> result = employeeChangeDialogView.showAndWait();
 
+        EmployeeChangeViewController employeeChangeViewController = fxmlLoader.getController();
+        String employeeName = employeeChangeViewController.getEmployeeNameField().getText();
+        String managerName = employeeChangeViewController.getManagerNameField().getText();
+
         if(result.isPresent() && result.get() == ButtonType.OK) {
 
-            System.out.println("clicked okay : )");
-                        
+            EmployeeRepository.getInstance().addEmployee(employeeName, managerName);
+
         } else {
             
             System.out.println("Cancelled");
@@ -182,14 +188,49 @@ public class ViewController {
     }
 
     @FXML
-    public void handleEditEmployeeClick() {
+    public void handleEditEmployeeClick() throws IOException {
+        Employee selectedEmployee = employeeTableView.getSelectionModel().getSelectedItem();
 
+        Dialog<ButtonType> employeeChangeDialogView = new Dialog<>();
+        employeeChangeDialogView.initOwner(givePoints.getScene().getWindow());
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("EmployeeChangeView.fxml"));
+        employeeChangeDialogView.getDialogPane().setContent(fxmlLoader.load());
+
+        employeeChangeDialogView.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        employeeChangeDialogView.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+        EmployeeChangeViewController employeeChangeViewController = fxmlLoader.getController();
+        employeeChangeViewController.autofillEmployeeChangeViewDialog(selectedEmployee);
+
+        Optional<ButtonType> result = employeeChangeDialogView.showAndWait();
+
+        if(result.isPresent() && result.get() == ButtonType.OK) {
+
+            String editedEmployeeName = employeeChangeViewController.getEmployeeNameField().getText().trim();
+            String editedManagerName = employeeChangeViewController.getManagerNameField().getText().trim();
+
+            selectedEmployee.setEmployeeName(editedEmployeeName);
+            selectedEmployee.setEmployeeManager(editedManagerName);
+
+        } else {
+
+            System.out.println("Cancelled");
+
+        }
     }
 
     @FXML
     public void handleDeleteEmployeeCLick() {
         Employee selectedEmployee = employeeTableView.getSelectionModel().getSelectedItem();
         EmployeeRepository.getInstance().getEmployeeObservableList().remove(selectedEmployee);
+    }
+
+    @FXML
+    public void handleExitButtonClick() {
+        Stage stage = (Stage) givePoints.getScene().getWindow();
+        stage.close();
     }
 
 }
