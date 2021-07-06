@@ -1,2 +1,3 @@
 # AttendanceTracker
  
+My first project using Java as well as JavaFX. Application is used to track Employee sick time (both paid and unpaid), as well as attendance penalty points (for being late, missing work unexcused, etc). Per the attendance policy, points fall off after a calendar year. Need for a solution was identified when direct reports complained of having to manually keep track of all this data for 40+ employees. This application handles all this with an easy to use GUI. Quality of life features are planned as feedback comes in from actual use of the application in the QA and Production deparments. 
