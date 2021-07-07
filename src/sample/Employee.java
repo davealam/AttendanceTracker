@@ -33,8 +33,10 @@ public class Employee implements Serializable {
     public Employee(String name, String manager) {
         this.employeeName = new SimpleStringProperty();
         this.employeeName.set(name);
+
         this.employeeManager = new SimpleStringProperty();
         this.employeeManager.set(manager);
+
         this.nextFallOffDate = new SimpleStringProperty();
         this.nextFallOffAmountString = new SimpleStringProperty();
 

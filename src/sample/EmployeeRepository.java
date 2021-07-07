@@ -13,7 +13,6 @@ import java.time.format.DateTimeFormatter;
 
 public class EmployeeRepository implements Serializable {
     private static EmployeeRepository instance = new EmployeeRepository();
-    private static File employeeList = new File("C:\\Users\\alam\\Desktop\\Java\\IOFile\\employeeList.txt");
     private DateTimeFormatter inputDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     private ObservableList<Employee> employeeObservableList;
