@@ -30,6 +30,7 @@ public class Main extends Application {
     @Override
     public void stop() throws Exception {
         EmployeeRepository.getInstance().saveState();
+        EmployeeRepository.getInstance().saveToSQLiteDB();
         super.stop();
     }
 }

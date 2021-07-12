@@ -8,6 +8,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -196,5 +197,13 @@ public class EmployeeRepository {
     public void addEmployee(String employeeName, String managerName) {
         Employee employeeToAdd = new Employee(employeeName, managerName);
         employeeObservableList.add(employeeToAdd);
+    }
+
+    public void saveToSQLiteDB() {
+        for(Employee employee : employeeObservableList) {
+            SQLiteDBHandler sqLiteDBHandler = new SQLiteDBHandler();
+            sqLiteDBHandler.connectionOpen();
+            sqLiteDBHandler.writeEmployeeToDB(employee);
+        }
     }
 }
