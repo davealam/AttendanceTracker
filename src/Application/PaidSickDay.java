@@ -1,4 +1,4 @@
-package sample;
+package Application;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -7,14 +7,14 @@ import javafx.beans.property.SimpleStringProperty;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class UnpaidSickDay {
+public class PaidSickDay {
     private SimpleStringProperty dateUsed;
     private SimpleObjectProperty<LocalDate> dateUsedValue;
     private SimpleDoubleProperty amountUsed;
     private SimpleStringProperty managerComment;
     private DateTimeFormatter dateTimeFormatter;
 
-    public UnpaidSickDay(double amount, LocalDate date, String comment) {
+    public PaidSickDay(double amount, LocalDate date, String comment) {
         this.dateTimeFormatter = DateTimeFormatter.ofPattern("EEEE, MMMM dd, u");
 
         this.amountUsed = new SimpleDoubleProperty();
@@ -28,8 +28,6 @@ public class UnpaidSickDay {
 
         this.managerComment = new SimpleStringProperty();
         this.managerComment.set(comment);
-
-
     }
 
     public double getAmountUsed() {
@@ -44,14 +42,6 @@ public class UnpaidSickDay {
         return dateUsed.get();
     }
 
-    public LocalDate getDateUsedValue() {
-        return dateUsedValue.get();
-    }
-
-    public SimpleObjectProperty<LocalDate> dateUsedValueProperty() {
-        return dateUsedValue;
-    }
-
     public SimpleStringProperty dateUsedProperty() {
         return dateUsed;
     }
@@ -62,6 +52,14 @@ public class UnpaidSickDay {
 
     public SimpleStringProperty managerCommentProperty() {
         return managerComment;
+    }
+
+    public LocalDate getDateUsedValue() {
+        return dateUsedValue.get();
+    }
+
+    public SimpleObjectProperty<LocalDate> dateUsedValueProperty() {
+        return dateUsedValue;
     }
 
     public void setDateUsed(LocalDate dateUsed) {

@@ -3,6 +3,6 @@ module AttendanceTracker {
     requires javafx.controls;
     requires json.simple;
 
-    opens sample;
+    opens Application;
 
 }
