@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 
-public class Employee implements Serializable {
+public class Employee {
 
     private SimpleStringProperty employeeName;
     private SimpleStringProperty employeeManager;

@@ -144,9 +144,7 @@ public class ViewController {
 
             int inputPoints = Integer.valueOf(givePointsDialogViewController.getPointsField().getText().trim());
             LocalDate inputReceivedDate = givePointsDialogViewController.getDateField().getValue();
-
-            System.out.println(inputReceivedDate);
-
+            
             String inputManagerNotes = givePointsDialogViewController.getNotesField().getText().trim();
 
             selectedEmployee.addPoints(inputPoints, inputReceivedDate, inputManagerNotes);

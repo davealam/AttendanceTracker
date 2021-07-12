@@ -11,7 +11,7 @@ import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class EmployeeRepository implements Serializable {
+public class EmployeeRepository {
     private static EmployeeRepository instance = new EmployeeRepository();
     private DateTimeFormatter inputDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 

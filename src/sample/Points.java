@@ -19,8 +19,6 @@ public class Points {
     private SimpleStringProperty receivedDateAsString;
     private SimpleStringProperty fallOffDateAsString;
 
-
-    //Constructor for testing and manual entry of receipt date
     public Points(int pointAmount, LocalDate pointReceivedDate, String comment) {
         this.dateTimeFormatter = DateTimeFormatter.ofPattern("EEEE, MMMM dd, u");
 
