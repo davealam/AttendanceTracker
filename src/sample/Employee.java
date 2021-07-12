@@ -57,6 +57,16 @@ public class Employee {
 
     }
 
+    //Removes expired points by checking each point received date vs current date
+    public void removeExpiredPoints() {
+        for(int i = 0; i< pointsObservableList.size(); i++) {
+            if(pointsObservableList.get(i).getFallOffDate().isBefore(LocalDate.now())) {
+                Points pointsToBeRemoved = pointsObservableList.get(i);
+                removePoints(pointsToBeRemoved);
+            }
+        }
+    }
+
     public void addPoints(int amount, LocalDate receivedDate, String comment) {
         Points pointsToBeAdded = new Points(amount, receivedDate, comment);
         pointsObservableList.add(pointsToBeAdded);
