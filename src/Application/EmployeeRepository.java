@@ -183,12 +183,9 @@ public class EmployeeRepository {
                 retrievedUnpaidSickDay = (JSONObject) retrievedUnpaidSickDayObservableList.get(m);
 
                 double amountUsed = (double) retrievedUnpaidSickDay.get("amountUsed");
-
                 String dateUsedValue = (String) retrievedUnpaidSickDay.get("dateUsedValue");
                 LocalDate dateUsed = LocalDate.parse(dateUsedValue, inputDateFormatter);
-
                 String managerComment = (String) retrievedUnpaidSickDay.get("managerComment");
-
                 employee.addUnpaidSickDay(amountUsed, dateUsed, managerComment);
 
             }
@@ -201,24 +198,31 @@ public class EmployeeRepository {
     }
 
     public void saveToSQLiteDB() {
+        Connection connection = SQLiteDBHandler.openConnection();
 
         SQLiteDBHandler sqLiteDBHandler = new SQLiteDBHandler();
 
+        sqLiteDBHandler.wipeDBTables(connection);
+
         for(Employee employee : employeeObservableList) {
-
-            Statement statement = sqLiteDBHandler.connectionOpen();
             ObservableList<Points> pointsObservableList = employee.getPointsObservableList();
-
-            sqLiteDBHandler.writeEmployeesToDB(statement, employee);
+            sqLiteDBHandler.writeEmployeesToDB(connection, employee);
 
             for(Points points : pointsObservableList) {
-
-                sqLiteDBHandler.writeEmployeePointsToDB(statement, employee, points);
-
+                sqLiteDBHandler.writeEmployeePointsToDB(connection, employee, points);
             }
         }
+        sqLiteDBHandler.closeConnection();
+    }
 
-        sqLiteDBHandler.connectionClose();
+    public void readFromSQLiteDB() {
+        Connection connection = SQLiteDBHandler.openConnection();
+        SQLiteDBHandler sqLiteDBHandler = new SQLiteDBHandler();
 
+        this.employeeObservableList = sqLiteDBHandler.readEmployeesFromDB(connection);
+
+        for(Employee employee : employeeObservableList) {
+            sqLiteDBHandler.readEmployeePointsFromDB(connection, employee);
+        }
     }
 }

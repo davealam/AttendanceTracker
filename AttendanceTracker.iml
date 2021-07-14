@@ -11,7 +11,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../lib/JSONsimple/json-simple-1.1.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../lib/json-simple-1.1.1/json-simple-1.1.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
