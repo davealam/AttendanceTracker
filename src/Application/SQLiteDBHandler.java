@@ -5,28 +5,28 @@ import java.sql.*;
 public class SQLiteDBHandler {
 
     Connection connection;
-    public static final String EMPLOYEEINFORMATION_TABLE = "EmployeeInformation";
+    Statement statement;
 
-    public boolean connectionOpen() {
+    public static final String EMPLOYEEINFORMATION_TABLE = "EmployeeInformation";
+    public static final String POINTS_TABLE = "Points";
+
+    public Statement connectionOpen() {
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:EmployeeData.db");
+            statement = connection.createStatement();
         } catch (SQLException exception) {
             exception.printStackTrace();
             System.out.println("Unable to connect to DB");
-            return false;
+            return null;
         }
-        return true;
+        return statement;
     }
 
-    public void writeEmployeeToDB(Employee employee) {
-
-        Statement statement = null;
+    public void writeEmployeesToDB(Statement statement, Employee employee) {
 
         try {
-
-            statement = connection.createStatement();
-
-            statement.execute("INSERT INTO " + EMPLOYEEINFORMATION_TABLE + " VALUES(" + "'" + employee.getEmployeeName() + "', '" + employee.getEmployeeManager() + "');");
+            statement.execute("INSERT INTO " + EMPLOYEEINFORMATION_TABLE +
+                    " VALUES(" + "'" + employee.getEmployeeName() + "', '" + employee.getEmployeeManager() + "');");
 
         } catch (SQLException exception) {
             exception.printStackTrace();
@@ -39,6 +39,25 @@ public class SQLiteDBHandler {
             }
         }
 
+    }
+
+    public void writeEmployeePointsToDB(Statement statement, Employee employee, Points points) {
+
+        try {
+            statement.execute("INSERT INTO " + POINTS_TABLE + " VALUES(" + "'" +
+                    employee.getEmployeeName() + "', " + "'" + points.getReceivedDateAsString() + "', " +
+                    points.getAmount() + ", " + "'" + points.getManagerComment() + "');");
+
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        } finally {
+            try {
+                statement.close();
+            } catch ( SQLException exception) {
+                exception.printStackTrace();
+                System.out.println("Unable to close statement");
+            }
+        }
     }
 
     public boolean connectionClose() {

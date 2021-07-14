@@ -6,13 +6,14 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import java.sql.*;
 
 import java.io.*;
-import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class EmployeeRepository {
+
     private static EmployeeRepository instance = new EmployeeRepository();
     private DateTimeFormatter inputDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -200,10 +201,24 @@ public class EmployeeRepository {
     }
 
     public void saveToSQLiteDB() {
+
+        SQLiteDBHandler sqLiteDBHandler = new SQLiteDBHandler();
+
         for(Employee employee : employeeObservableList) {
-            SQLiteDBHandler sqLiteDBHandler = new SQLiteDBHandler();
-            sqLiteDBHandler.connectionOpen();
-            sqLiteDBHandler.writeEmployeeToDB(employee);
+
+            Statement statement = sqLiteDBHandler.connectionOpen();
+            ObservableList<Points> pointsObservableList = employee.getPointsObservableList();
+
+            sqLiteDBHandler.writeEmployeesToDB(statement, employee);
+
+            for(Points points : pointsObservableList) {
+
+                sqLiteDBHandler.writeEmployeePointsToDB(statement, employee, points);
+
+            }
         }
+
+        sqLiteDBHandler.connectionClose();
+
     }
 }
