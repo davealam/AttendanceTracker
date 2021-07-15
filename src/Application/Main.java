@@ -13,7 +13,7 @@ public class Main extends Application {
 //        EmployeeRepository.getInstance().loadState();
         EmployeeRepository.getInstance().readFromSQLiteDB();
 
-        //Goes through loaded employee list and calls method to remove expired points
+        //Write this as a method to be called
         for(int i = 0; i < EmployeeRepository.getInstance().getEmployeeObservableList().size(); i++) {
             EmployeeRepository.getInstance().getEmployeeObservableList().get(i).removeExpiredPoints();
         }

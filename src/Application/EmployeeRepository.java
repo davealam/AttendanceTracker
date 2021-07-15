@@ -33,6 +33,7 @@ public class EmployeeRepository {
         return employeeObservableList;
     }
 
+    //No longer in use, moved to SQLite DB for data persistence
     public void saveState() {
 
         JSONArray jsonEmployeeArray = new JSONArray();
@@ -105,6 +106,7 @@ public class EmployeeRepository {
         }
     }
 
+    //No longer in use, moved to SQLite DB for data persistence
     public void loadState() {
 
         //Declare containers to be used for retrieved objects and arrays
@@ -206,10 +208,21 @@ public class EmployeeRepository {
 
         for(Employee employee : employeeObservableList) {
             ObservableList<Points> pointsObservableList = employee.getPointsObservableList();
+            ObservableList<PaidSickDay> paidSickDayObservableList = employee.getPaidSickDayObservableList();
+            ObservableList<UnpaidSickDay> unpaidSickDayObservableList = employee.getUnpaidSickDayObservableList();
+
             sqLiteDBHandler.writeEmployeesToDB(connection, employee);
 
             for(Points points : pointsObservableList) {
-                sqLiteDBHandler.writeEmployeePointsToDB(connection, employee, points);
+                sqLiteDBHandler.writePointsToDB(connection, employee, points);
+            }
+
+            for(PaidSickDay paidSickDay : paidSickDayObservableList) {
+                sqLiteDBHandler.writePaidSickDaysToDB(connection, employee, paidSickDay);
+            }
+
+            for(UnpaidSickDay unpaidSickDay : unpaidSickDayObservableList) {
+                sqLiteDBHandler.writeUnpaidSickDaysToDB(connection, employee, unpaidSickDay);
             }
         }
         sqLiteDBHandler.closeConnection();
@@ -222,7 +235,9 @@ public class EmployeeRepository {
         this.employeeObservableList = sqLiteDBHandler.readEmployeesFromDB(connection);
 
         for(Employee employee : employeeObservableList) {
-            sqLiteDBHandler.readEmployeePointsFromDB(connection, employee);
+            sqLiteDBHandler.readPointsFromDB(connection, employee);
+            sqLiteDBHandler.readPaidSickDaysFromDB(connection, employee);
+            sqLiteDBHandler.readUnpaidSickDaysFromDB(connection, employee);
         }
     }
 }
