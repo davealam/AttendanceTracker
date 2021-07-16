@@ -22,7 +22,7 @@ public class DetailViewController {
     @FXML
     private TableColumn<Points, String> dateReceivedCol;
     @FXML
-    private TableColumn<Points, String> fallOffDateCol;
+    private TableColumn<Points, String> twelveMonthRollingFallOffDateCol;
     @FXML
     private TableColumn<Points, String> managerNotesCol;
     @FXML
@@ -40,10 +40,10 @@ public class DetailViewController {
 
         pointsCol.setCellValueFactory(new PropertyValueFactory<Points, Integer>("amount"));
         dateReceivedCol.setCellValueFactory(new PropertyValueFactory<Points, String>("receivedDateAsString"));
-        fallOffDateCol.setCellValueFactory(new PropertyValueFactory<Points, String>("fallOffDateAsString"));
+        twelveMonthRollingFallOffDateCol.setCellValueFactory(new PropertyValueFactory<Points, String>("twelveMonthRollingFallOffDateAsString"));
         managerNotesCol.setCellValueFactory(new PropertyValueFactory<Points, String>("managerComment"));
 
-        pointsTableView.setItems(selectedEmployee.getPointsObservableList());
+        pointsTableView.setItems(selectedEmployee.getTwelveMonthRollingPointsObservableList());
 
         employeeNameDisplay.setText(selectedEmployee.getEmployeeName() + " Detail View: Points Accrued");
     }
@@ -61,7 +61,8 @@ public class DetailViewController {
     @FXML
     public void handleDeletePointsClick() {
         Points selectedPoints = pointsTableView.getSelectionModel().getSelectedItem();
-        selectedEmployee.removePoints(selectedPoints);
+        selectedEmployee.removePointsFromTwelveMonthRollingList(selectedPoints);
+        selectedEmployee.removePointsFromTwentyFourMonthRollingList(selectedPoints);
     }
 
     @FXML

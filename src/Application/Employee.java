@@ -14,14 +14,18 @@ public class Employee {
 
     private SimpleStringProperty employeeName;
     private SimpleStringProperty employeeManager;
-    private SimpleStringProperty nextFallOffDate;
-    private SimpleStringProperty nextFallOffAmountString;
-    private SimpleIntegerProperty totalPointsInteger;
+
+    private SimpleStringProperty nextTwelveMonthRollingFallOffDate;
+    private SimpleStringProperty nextTwelveMonthFallOffAmountString;
+    private SimpleIntegerProperty twelveMonthRollingTotalPointsInteger;
+    private SimpleStringProperty nextTwentyFourMonthRollingFallOffDate;
+    private SimpleIntegerProperty twentyFourMonthRollingTotalPointsInteger;
 
     private SimpleDoubleProperty totalPaidSickDaysUsed;
     private SimpleDoubleProperty totalUnpaidSickDaysUsed;
 
-    private ObservableList<Points> pointsObservableList;
+    private ObservableList<Points> twelveMonthRollingPointsObservableList;
+    private ObservableList<Points> twentyFourMonthRollingPointsObservableList;
     private ObservableList<PaidSickDay> paidSickDayObservableList;
     private ObservableList<UnpaidSickDay> unpaidSickDayObservableList;
 
@@ -36,12 +40,14 @@ public class Employee {
         this.employeeManager = new SimpleStringProperty();
         this.employeeManager.set(manager);
 
-        this.nextFallOffDate = new SimpleStringProperty();
-        this.nextFallOffAmountString = new SimpleStringProperty();
+        this.nextTwelveMonthRollingFallOffDate = new SimpleStringProperty();
+        this.nextTwelveMonthFallOffAmountString = new SimpleStringProperty();
+        this.nextTwentyFourMonthRollingFallOffDate = new SimpleStringProperty();
 
         this.fallOffDateComparator = new FallOffDateComparator();
 
-        this.totalPointsInteger = new SimpleIntegerProperty();
+        this.twelveMonthRollingTotalPointsInteger = new SimpleIntegerProperty();
+        this.twentyFourMonthRollingTotalPointsInteger = new SimpleIntegerProperty();
 
         this.totalPaidSickDaysUsed = new SimpleDoubleProperty();
 
@@ -50,7 +56,8 @@ public class Employee {
         this.dateTimeFormatter = DateTimeFormatter.ofPattern("EEEE, MMMM dd, u");
 
         //observable lists
-        this.pointsObservableList = FXCollections.observableArrayList();
+        this.twelveMonthRollingPointsObservableList = FXCollections.observableArrayList();
+        this.twentyFourMonthRollingPointsObservableList = FXCollections.observableArrayList();
         this.paidSickDayObservableList = FXCollections.observableArrayList();
         this.unpaidSickDayObservableList = FXCollections.observableArrayList();
 
@@ -58,26 +65,48 @@ public class Employee {
 
     //Removes expired points by checking each point received date vs current date
     public void removeExpiredPoints() {
-        for(int i = 0; i< pointsObservableList.size(); i++) {
-            if(pointsObservableList.get(i).getFallOffDate().isBefore(LocalDate.now())) {
-                Points pointsToBeRemoved = pointsObservableList.get(i);
-                removePoints(pointsToBeRemoved);
+        for(int i = 0; i< twelveMonthRollingPointsObservableList.size(); i++) {
+            if(twelveMonthRollingPointsObservableList.get(i).getTwelveMonthFallOffDate().isBefore(LocalDate.now())) {
+
+                Points twelveMonthRollingPointsToBeRemoved = twelveMonthRollingPointsObservableList.get(i);
+                removePointsFromTwelveMonthRollingList(twelveMonthRollingPointsToBeRemoved);
             }
         }
+
+        for(int i = 0; i< twentyFourMonthRollingPointsObservableList.size(); i++) {
+            if(twentyFourMonthRollingPointsObservableList.get(i).getTwentyFourMonthFallOffDate().isBefore(LocalDate.now())) {
+
+                Points twentyFourMonthRollingPointsToBeRemoved = twentyFourMonthRollingPointsObservableList.get(i);
+                removePointsFromTwentyFourMonthRollingList(twentyFourMonthRollingPointsToBeRemoved);
+            }
+        }
+
     }
 
     public void addPoints(int amount, LocalDate receivedDate, String comment) {
         Points pointsToBeAdded = new Points(amount, receivedDate, comment);
-        pointsObservableList.add(pointsToBeAdded);
+        twelveMonthRollingPointsObservableList.add(pointsToBeAdded);
+        twentyFourMonthRollingPointsObservableList.add(pointsToBeAdded);
+        setFallOffs();
+        setPointTotals();
+        System.out.println("12 MONTH LIST SIZE: " + twelveMonthRollingPointsObservableList.size());
+        System.out.println("24 MONTH LIST SIZE: " + twentyFourMonthRollingPointsObservableList.size());
+    }
+
+    public void removePointsFromTwelveMonthRollingList(Points pointsToBeRemoved) {
+        twelveMonthRollingPointsObservableList.remove(pointsToBeRemoved);
+        System.out.println("One removed from 12: " + twelveMonthRollingPointsObservableList.size());
         setFallOffs();
         setPointTotals();
     }
 
-    public void removePoints(Points pointsToBeRemoved) {
-        pointsObservableList.remove(pointsToBeRemoved);
+    public void removePointsFromTwentyFourMonthRollingList(Points pointsToBeRemoved) {
+        twentyFourMonthRollingPointsObservableList.remove(pointsToBeRemoved);
+        System.out.println("One removed from 24: " + twentyFourMonthRollingPointsObservableList.size());
         setFallOffs();
         setPointTotals();
     }
+
 
     public void addPaidSickDay(double amount, LocalDate date, String comment) {
         PaidSickDay newPaidSickDay = new PaidSickDay(amount, date, comment);
@@ -92,25 +121,44 @@ public class Employee {
     }
 
     public void setFallOffs() {
-        Collections.sort(pointsObservableList, fallOffDateComparator);
+        Collections.sort(twelveMonthRollingPointsObservableList, fallOffDateComparator);
 
-        if(pointsObservableList.isEmpty()) {
-            this.nextFallOffDate.set(null);
-            this.nextFallOffAmountString.set(null);
+        if(twelveMonthRollingPointsObservableList.isEmpty()) {
+            this.nextTwelveMonthRollingFallOffDate.set(null);
+            this.nextTwelveMonthFallOffAmountString.set(null);
         } else {
             int earliestDate = 0;
-            this.nextFallOffDate.set(pointsObservableList.get(earliestDate).getFallOffDate().format(dateTimeFormatter).toString());
-            this.nextFallOffAmountString.set(String.valueOf(pointsObservableList.get(earliestDate).getAmount()));
+            this.nextTwelveMonthRollingFallOffDate.set(twelveMonthRollingPointsObservableList.
+                    get(earliestDate).getTwelveMonthFallOffDate().format(dateTimeFormatter).toString());
+            this.nextTwelveMonthFallOffAmountString.set(String.valueOf(twelveMonthRollingPointsObservableList.
+                    get(earliestDate).getAmount()));
         }
+
+        if(twentyFourMonthRollingPointsObservableList.isEmpty()) {
+            this.nextTwentyFourMonthRollingFallOffDate.set(null);
+        } else {
+            int earliestDate = 0;
+            this.nextTwentyFourMonthRollingFallOffDate.set(twentyFourMonthRollingPointsObservableList.
+                    get(earliestDate).getTwentyFourMonthFallOffDate().format(dateTimeFormatter).toString());
+        }
+
     }
 
     public void setPointTotals() {
-        int sumOfPoints = 0;
-        for(int i = 0; i<pointsObservableList.size(); i++) {
-            sumOfPoints = pointsObservableList.get(i).getAmount() + sumOfPoints;
+        int sumOfTwelveMonthRollingPoints = 0;
+        for(int i = 0; i< twelveMonthRollingPointsObservableList.size(); i++) {
+            sumOfTwelveMonthRollingPoints = twelveMonthRollingPointsObservableList.get(i).getAmount() + sumOfTwelveMonthRollingPoints;
         }
 
-        this.totalPointsInteger.set(sumOfPoints);
+        this.twelveMonthRollingTotalPointsInteger.set(sumOfTwelveMonthRollingPoints);
+
+        int sumOfTwentyFourMonthRollingPoints = 0;
+        for(int i = 0; i< twentyFourMonthRollingPointsObservableList.size(); i++) {
+            sumOfTwentyFourMonthRollingPoints = twentyFourMonthRollingPointsObservableList.get(i).getAmount() + sumOfTwentyFourMonthRollingPoints;
+        }
+
+        this.twentyFourMonthRollingTotalPointsInteger.set(sumOfTwentyFourMonthRollingPoints);
+
     }
 
     public void setSickDaysTotal() {
@@ -151,40 +199,40 @@ public class Employee {
         this.employeeManager.set(employeeManager);
     }
 
-    public String getNextFallOffDate() {
-        return nextFallOffDate.get();
+    public String getNextTwelveMonthRollingFallOffDate() {
+        return nextTwelveMonthRollingFallOffDate.get();
     }
 
-    public SimpleStringProperty nextFallOffDateProperty() {
-        return nextFallOffDate;
+    public SimpleStringProperty nextTwelveMonthRollingFallOffDateProperty() {
+        return nextTwelveMonthRollingFallOffDate;
     }
 
-    public void setNextFallOffDate(String nextFallOffDate) {
-        this.nextFallOffDate.set(nextFallOffDate);
+    public void setNextTwelveMonthRollingFallOffDate(String nextTwelveMonthRollingFallOffDate) {
+        this.nextTwelveMonthRollingFallOffDate.set(nextTwelveMonthRollingFallOffDate);
     }
 
-    public String getNextFallOffAmountString() {
-        return nextFallOffAmountString.get();
+    public String getNextTwelveMonthFallOffAmountString() {
+        return nextTwelveMonthFallOffAmountString.get();
     }
 
-    public SimpleStringProperty nextFallOffAmountStringProperty() {
-        return nextFallOffAmountString;
+    public SimpleStringProperty nextTwelveMonthFallOffAmountStringProperty() {
+        return nextTwelveMonthFallOffAmountString;
     }
 
-    public void setNextFallOffAmountString(String nextFallOffAmountString) {
-        this.nextFallOffAmountString.set(nextFallOffAmountString);
+    public void setNextTwelveMonthFallOffAmountString(String nextTwelveMonthFallOffAmountString) {
+        this.nextTwelveMonthFallOffAmountString.set(nextTwelveMonthFallOffAmountString);
     }
 
-    public int getTotalPointsInteger() {
-        return totalPointsInteger.get();
+    public int getTwelveMonthRollingTotalPointsInteger() {
+        return twelveMonthRollingTotalPointsInteger.get();
     }
 
-    public SimpleIntegerProperty totalPointsIntegerProperty() {
-        return totalPointsInteger;
+    public SimpleIntegerProperty twelveMonthRollingTotalPointsIntegerProperty() {
+        return twelveMonthRollingTotalPointsInteger;
     }
 
-    public ObservableList<Points> getPointsObservableList() {
-        return pointsObservableList;
+    public ObservableList<Points> getTwelveMonthRollingPointsObservableList() {
+        return twelveMonthRollingPointsObservableList;
     }
 
     public ObservableList<PaidSickDay> getPaidSickDayObservableList() {
@@ -211,6 +259,25 @@ public class Employee {
         return totalUnpaidSickDaysUsed;
     }
 
+    public String getNextTwentyFourMonthRollingFallOffDate() {
+        return nextTwentyFourMonthRollingFallOffDate.get();
+    }
+
+    public SimpleStringProperty nextTwentyFourMonthRollingFallOffDateProperty() {
+        return nextTwentyFourMonthRollingFallOffDate;
+    }
+
+    public int getTwentyFourMonthRollingTotalPointsInteger() {
+        return twentyFourMonthRollingTotalPointsInteger.get();
+    }
+
+    public SimpleIntegerProperty twentyFourMonthRollingTotalPointsIntegerProperty() {
+        return twentyFourMonthRollingTotalPointsInteger;
+    }
+
+    public ObservableList<Points> getTwentyFourMonthRollingPointsObservableList() {
+        return twentyFourMonthRollingPointsObservableList;
+    }
 
     @Override
     public String toString() {

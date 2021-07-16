@@ -65,11 +65,11 @@ public class EmployeeRepository {
             employeeContainer.put("unpaidSickDayObservableList", jsonUnpaidSickDayArray);
 
 
-            for (int i = 0; i < employee.getPointsObservableList().size(); i++) {
+            for (int i = 0; i < employee.getTwelveMonthRollingPointsObservableList().size(); i++) {
                 JSONObject pointJSONObject = new JSONObject();
-                pointJSONObject.put("pointAmount", employee.getPointsObservableList().get(i).getAmount());
-                pointJSONObject.put("receivedDate", employee.getPointsObservableList().get(i).getReceivedDate().toString());
-                pointJSONObject.put("managerComment", employee.getPointsObservableList().get(i).getManagerComment());
+                pointJSONObject.put("pointAmount", employee.getTwelveMonthRollingPointsObservableList().get(i).getAmount());
+                pointJSONObject.put("receivedDate", employee.getTwelveMonthRollingPointsObservableList().get(i).getReceivedDate().toString());
+                pointJSONObject.put("managerComment", employee.getTwelveMonthRollingPointsObservableList().get(i).getManagerComment());
 
                 jsonPointsArray.add(pointJSONObject);
             }
@@ -207,7 +207,7 @@ public class EmployeeRepository {
         sqLiteDBHandler.wipeDBTables(connection);
 
         for(Employee employee : employeeObservableList) {
-            ObservableList<Points> pointsObservableList = employee.getPointsObservableList();
+            ObservableList<Points> pointsObservableList = employee.getTwelveMonthRollingPointsObservableList();
             ObservableList<PaidSickDay> paidSickDayObservableList = employee.getPaidSickDayObservableList();
             ObservableList<UnpaidSickDay> unpaidSickDayObservableList = employee.getUnpaidSickDayObservableList();
 

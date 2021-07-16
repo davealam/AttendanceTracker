@@ -11,13 +11,15 @@ public class Points {
 
     private SimpleIntegerProperty amount;
     private SimpleObjectProperty<LocalDate> receivedDate;
-    private SimpleObjectProperty<LocalDate> fallOffDate;
+    private SimpleObjectProperty<LocalDate> twelveMonthFallOffDate;
+    private SimpleObjectProperty<LocalDate> twentyFourMonthFallOffDate;
     private SimpleStringProperty managerComment;
 
     private DateTimeFormatter dateTimeFormatter;
 
     private SimpleStringProperty receivedDateAsString;
-    private SimpleStringProperty fallOffDateAsString;
+    private SimpleStringProperty twelveMonthRollingFallOffDateAsString;
+    private SimpleObjectProperty twentyFourMonthRollingFallOffDateAsString;
 
     public Points(int pointAmount, LocalDate pointReceivedDate, String comment) {
         this.dateTimeFormatter = DateTimeFormatter.ofPattern("EEEE, MMMM dd, u");
@@ -28,12 +30,19 @@ public class Points {
         this.receivedDate = new SimpleObjectProperty<>();
         this.receivedDate.set(pointReceivedDate);
 
-        this.fallOffDate = new SimpleObjectProperty<>();
-        this.fallOffDate.set(receivedDate.get().plusYears(1));
+        this.twelveMonthFallOffDate = new SimpleObjectProperty<>();
+        this.twelveMonthFallOffDate.set(receivedDate.get().plusYears(1));
+
+        this.twentyFourMonthFallOffDate = new SimpleObjectProperty<>();
+        this.twentyFourMonthFallOffDate.set(receivedDate.get().plusYears(2));
+
+        System.out.println("24 month fall of date: " + twentyFourMonthFallOffDate);
 
         //String format for points detailed tableView
-        this.fallOffDateAsString = new SimpleStringProperty();
-        this.fallOffDateAsString.set(dateTimeFormatter.format(fallOffDate.get()));
+        this.twelveMonthRollingFallOffDateAsString = new SimpleStringProperty();
+        this.twelveMonthRollingFallOffDateAsString.set(dateTimeFormatter.format(twelveMonthFallOffDate.get()));
+        this.twentyFourMonthRollingFallOffDateAsString = new SimpleObjectProperty();
+        this.twentyFourMonthRollingFallOffDateAsString.set(dateTimeFormatter.format(twentyFourMonthFallOffDate.get()));
         this.receivedDateAsString = new SimpleStringProperty();
         this.receivedDateAsString.set(dateTimeFormatter.format(pointReceivedDate));
 
@@ -68,16 +77,23 @@ public class Points {
     }
 
     public void updateFallOffDate() {
-        this.fallOffDate.set(receivedDate.get().plusYears(1));
-        this.fallOffDateAsString.set(dateTimeFormatter.format(receivedDate.get().plusYears(1)));
+        this.twelveMonthFallOffDate.set(receivedDate.get().plusYears(1));
+        this.twelveMonthRollingFallOffDateAsString.set(dateTimeFormatter.format(receivedDate.get().plusYears(1)));
+
+        this.twentyFourMonthFallOffDate.set(receivedDate.get().plusYears(2));
+        this.twentyFourMonthRollingFallOffDateAsString.set(dateTimeFormatter.format(receivedDate.get().plusYears(2)));
     }
 
-    public LocalDate getFallOffDate() {
-        return fallOffDate.get();
+    public LocalDate getTwelveMonthFallOffDate() {
+        return twelveMonthFallOffDate.get();
     }
 
-    public SimpleObjectProperty<LocalDate> fallOffDateProperty() {
-        return fallOffDate;
+    public LocalDate getTwentyFourMonthFallOffDate() {
+        return twentyFourMonthFallOffDate.get();
+    }
+
+    public SimpleObjectProperty<LocalDate> twelveMonthFallOffDateProperty() {
+        return twelveMonthFallOffDate;
     }
 
     public String getManagerComment() {
@@ -100,12 +116,24 @@ public class Points {
         return receivedDateAsString;
     }
 
-    public String getFallOffDateAsString() {
-        return fallOffDateAsString.get();
+    public String getTwelveMonthRollingFallOffDateAsString() {
+        return twelveMonthRollingFallOffDateAsString.get();
     }
 
-    public SimpleStringProperty fallOffDateAsStringProperty() {
-        return fallOffDateAsString;
+    public SimpleStringProperty twelveMonthRollingFallOffDateAsStringProperty() {
+        return twelveMonthRollingFallOffDateAsString;
+    }
+
+    public SimpleObjectProperty<LocalDate> twentyFourMonthFallOffDateProperty() {
+        return twentyFourMonthFallOffDate;
+    }
+
+    public Object getTwentyFourMonthRollingFallOffDateAsString() {
+        return twentyFourMonthRollingFallOffDateAsString.get();
+    }
+
+    public SimpleObjectProperty twentyFourMonthRollingFallOffDateAsStringProperty() {
+        return twentyFourMonthRollingFallOffDateAsString;
     }
 
     @Override

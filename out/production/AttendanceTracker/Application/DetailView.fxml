@@ -18,7 +18,7 @@
         <columns>
           <TableColumn fx:id="pointsCol" prefWidth="55.0" text="Points" />
           <TableColumn fx:id="dateReceivedCol" prefWidth="220.0" text="Date Received" />
-            <TableColumn fx:id="fallOffDateCol" minWidth="0.0" prefWidth="179.0" text="Fall Off Date" />
+            <TableColumn fx:id="twelveMonthRollingFallOffDateCol" minWidth="0.0" prefWidth="179.0" text="Fall Off Date" />
             <TableColumn fx:id="managerNotesCol" prefWidth="245.0" text="Manager Notes" />
         </columns>
       </TableView>
