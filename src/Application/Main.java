@@ -10,7 +10,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-//        EmployeeRepository.getInstance().loadState();
         EmployeeRepository.getInstance().readFromSQLiteDB();
 
         for(int i = 0; i < EmployeeRepository.getInstance().getEmployeeObservableList().size(); i++) {
@@ -29,7 +28,6 @@ public class Main extends Application {
 
     @Override
     public void stop() throws Exception {
-//        EmployeeRepository.getInstance().saveState();
         EmployeeRepository.getInstance().saveToSQLiteDB();
         super.stop();
     }
