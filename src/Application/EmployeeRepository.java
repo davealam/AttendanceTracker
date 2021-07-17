@@ -207,13 +207,14 @@ public class EmployeeRepository {
         sqLiteDBHandler.wipeDBTables(connection);
 
         for(Employee employee : employeeObservableList) {
-            ObservableList<Points> pointsObservableList = employee.getTwelveMonthRollingPointsObservableList();
+            ObservableList<Points> twentyFourMonthRollingPointsObservableList =
+                    employee.getTwentyFourMonthRollingPointsObservableList();
             ObservableList<PaidSickDay> paidSickDayObservableList = employee.getPaidSickDayObservableList();
             ObservableList<UnpaidSickDay> unpaidSickDayObservableList = employee.getUnpaidSickDayObservableList();
 
             sqLiteDBHandler.writeEmployeesToDB(connection, employee);
 
-            for(Points points : pointsObservableList) {
+            for(Points points : twentyFourMonthRollingPointsObservableList) {
                 sqLiteDBHandler.writePointsToDB(connection, employee, points);
             }
 

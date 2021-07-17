@@ -69,6 +69,7 @@ public class Employee {
             if(twelveMonthRollingPointsObservableList.get(i).getTwelveMonthFallOffDate().isBefore(LocalDate.now())) {
 
                 Points twelveMonthRollingPointsToBeRemoved = twelveMonthRollingPointsObservableList.get(i);
+                twelveMonthRollingPointsToBeRemoved.setTwelveMonthRollingFallOffDateAsString(null);
                 removePointsFromTwelveMonthRollingList(twelveMonthRollingPointsToBeRemoved);
             }
         }
@@ -89,20 +90,16 @@ public class Employee {
         twentyFourMonthRollingPointsObservableList.add(pointsToBeAdded);
         setFallOffs();
         setPointTotals();
-        System.out.println("12 MONTH LIST SIZE: " + twelveMonthRollingPointsObservableList.size());
-        System.out.println("24 MONTH LIST SIZE: " + twentyFourMonthRollingPointsObservableList.size());
     }
 
     public void removePointsFromTwelveMonthRollingList(Points pointsToBeRemoved) {
         twelveMonthRollingPointsObservableList.remove(pointsToBeRemoved);
-        System.out.println("One removed from 12: " + twelveMonthRollingPointsObservableList.size());
         setFallOffs();
         setPointTotals();
     }
 
     public void removePointsFromTwentyFourMonthRollingList(Points pointsToBeRemoved) {
         twentyFourMonthRollingPointsObservableList.remove(pointsToBeRemoved);
-        System.out.println("One removed from 24: " + twentyFourMonthRollingPointsObservableList.size());
         setFallOffs();
         setPointTotals();
     }
@@ -135,6 +132,7 @@ public class Employee {
         }
 
         if(twentyFourMonthRollingPointsObservableList.isEmpty()) {
+            System.out.println("24 MONTH LIST IS EMPTY");
             this.nextTwentyFourMonthRollingFallOffDate.set(null);
         } else {
             int earliestDate = 0;

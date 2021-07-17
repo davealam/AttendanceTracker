@@ -24,6 +24,8 @@ public class DetailViewController {
     @FXML
     private TableColumn<Points, String> twelveMonthRollingFallOffDateCol;
     @FXML
+    private TableColumn<Points, String> twentyFourMonthRollingFallOffDateCol;
+    @FXML
     private TableColumn<Points, String> managerNotesCol;
     @FXML
     private Button back;
@@ -41,9 +43,10 @@ public class DetailViewController {
         pointsCol.setCellValueFactory(new PropertyValueFactory<Points, Integer>("amount"));
         dateReceivedCol.setCellValueFactory(new PropertyValueFactory<Points, String>("receivedDateAsString"));
         twelveMonthRollingFallOffDateCol.setCellValueFactory(new PropertyValueFactory<Points, String>("twelveMonthRollingFallOffDateAsString"));
+        twentyFourMonthRollingFallOffDateCol.setCellValueFactory(new PropertyValueFactory<Points, String>("twentyFourMonthRollingFallOffDateAsString"));
         managerNotesCol.setCellValueFactory(new PropertyValueFactory<Points, String>("managerComment"));
 
-        pointsTableView.setItems(selectedEmployee.getTwelveMonthRollingPointsObservableList());
+        pointsTableView.setItems(selectedEmployee.getTwentyFourMonthRollingPointsObservableList());
 
         employeeNameDisplay.setText(selectedEmployee.getEmployeeName() + " Detail View: Points Accrued");
     }

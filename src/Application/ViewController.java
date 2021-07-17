@@ -90,7 +90,7 @@ public class ViewController {
                     selectedEmployee.addUnpaidSickDay(sickDaysAmount, dateUsed, managerNotes);
             }
         } else {
-            System.out.println("Cancelled");
+
         }
     }
 

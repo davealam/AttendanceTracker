@@ -211,6 +211,8 @@ public class SQLiteDBHandler {
                 employee.addPoints(receivedAmountInt, receivedDate, managerComments);
             }
 
+            employee.removeExpiredPoints();
+
         } catch(SQLException exception) {
             exception.printStackTrace();
             System.out.println("Failed to read Points from DB");
