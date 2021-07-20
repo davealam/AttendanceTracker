@@ -11,7 +11,7 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="412.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.ViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.ViewController">
    <bottom>
       <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
@@ -26,14 +26,19 @@
    <center>
       <TableView fx:id="employeeTableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="nameCol" prefWidth="183.99999487400055" text="Employee Name" />
-          <TableColumn fx:id="pointsAccruedCol" prefWidth="114.66670227050781" text="Points Accrued" />
-            <TableColumn fx:id="nextFallOffDateCol" prefWidth="157.3333740234375" text="Next FO Date" />
-            <TableColumn fx:id="nextFallOffAmountCol" prefWidth="110.66671752929688" text="Next FO Amount" />
-            <TableColumn fx:id="sickDaysUsedCol" minWidth="30.0" prefWidth="151.0" text="Sick Days Used">
+          <TableColumn fx:id="nameCol" prefWidth="227.19997864961624" text="Employee Name" />
+            <TableColumn prefWidth="75.0" text="12 Months Rolling Points ">
+               <columns>
+                <TableColumn fx:id="twelveMonthPointsAccruedCol" prefWidth="92.80000305175781" text="Total Accrued" />
+                  <TableColumn fx:id="nextFallOffDateCol" prefWidth="273.5999755859375" text="Next Falloff Date" />
+                  <TableColumn fx:id="nextFallOffAmountCol" prefWidth="130.4000244140625" text="Next Falloff Amount" />
+               </columns>
+            </TableColumn>
+            <TableColumn fx:id="twentyFourMonthPointsAccruedCol" prefWidth="181.60015869140625" text="24 Months Rolling Points &#10;          Total Accrued" />
+            <TableColumn fx:id="sickDaysUsedCol" minWidth="0.0" prefWidth="108.7998046875" text="Sick Days Used">
                <columns>
                   <TableColumn fx:id="paidSickDaysUsedCol" minWidth="15.0" prefWidth="67.0" text="Paid" />
-                  <TableColumn fx:id="unpaidSickDaysUsedCol" minWidth="15.0" prefWidth="67.0" text="Unpaid" />
+                  <TableColumn fx:id="unpaidSickDaysUsedCol" minWidth="15.0" prefWidth="67.199951171875" text="Unpaid" />
                </columns>
             </TableColumn>
         </columns>
@@ -44,7 +49,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem fx:id="saveAndExit" onAction="#handleExitButtonClick" mnemonicParsing="false" text="Save and Exit" />
+              <MenuItem fx:id="saveAndExit" mnemonicParsing="false" onAction="#handleExitButtonClick" text="Save and Exit" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">

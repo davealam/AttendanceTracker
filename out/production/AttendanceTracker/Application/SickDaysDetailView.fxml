@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
-<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="412.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.SickDaysDetailsViewController">
+
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="700.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.SickDaysDetailsViewController">
   <items>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <top>
@@ -15,9 +21,9 @@
          <center>
             <TableView fx:id="paidSickDayTableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn fx:id="paidSickDaysUsedCol" prefWidth="168.0" text="Paid Sick Days Used" />
-                <TableColumn fx:id="paidDateUsedCol" prefWidth="201.0" text="Date Used" />
-                  <TableColumn fx:id="paidManagerCommentCol" prefWidth="348.0" text="Manager Notes" />
+                <TableColumn fx:id="paidSickDaysUsedCol" prefWidth="202.39998775720596" text="Paid Sick Days Used" />
+                <TableColumn fx:id="paidDateUsedCol" prefWidth="434.4000549316406" text="Date Used" />
+                  <TableColumn fx:id="paidManagerCommentCol" prefWidth="406.39990234375" text="Manager Notes" />
               </columns>
             </TableView>
          </center>
@@ -35,9 +41,9 @@
          <center>
             <TableView fx:id="unpaidSickDayTableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn fx:id="unpaidSickDaysUsedCol" prefWidth="168.0" text="Unpaid Sick Days Used" />
-                <TableColumn fx:id="unpaidDateUsedCol" prefWidth="201.0" text="Date Used" />
-                  <TableColumn fx:id="unpaidManagerCommentCol" prefWidth="348.0" text="Manager Notes" />
+                <TableColumn fx:id="unpaidSickDaysUsedCol" prefWidth="204.80001217126846" text="Unpaid Sick Days Used" />
+                <TableColumn fx:id="unpaidDateUsedCol" prefWidth="424.0000305175781" text="Date Used" />
+                  <TableColumn fx:id="unpaidManagerCommentCol" prefWidth="413.59991455078125" text="Manager Notes" />
               </columns>
             </TableView>
          </center>

@@ -11,7 +11,7 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/../../lib/javafx-sdk-16/lib/javafx.media.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../../lib/javafx-sdk-16/lib/javafx.swing.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../../lib/javafx-sdk-16/lib/javafx.web.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../lib/json-simple-1.1.1/json-simple-1.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../lib/SQLite JDBC/sqlite-jdbc-3.36.0.1.jar" path-in-jar="/" />
       <element id="dir-copy" path="$PROJECT_DIR$/../../lib/javafx-sdk-16/bin" />
     </root>
   </artifact>

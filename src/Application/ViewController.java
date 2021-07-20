@@ -19,7 +19,9 @@ public class ViewController {
     @FXML
     TableColumn<Employee, String> nameCol;
     @FXML
-    TableColumn<Employee, Integer> pointsAccruedCol;
+    TableColumn<Employee, Integer> twelveMonthPointsAccruedCol;
+    @FXML
+    TableColumn<Employee, Integer> twentyFourMonthPointsAccruedCol;
     @FXML
     TableColumn<Employee, String> nextFallOffDateCol;
     @FXML
@@ -47,9 +49,10 @@ public class ViewController {
 
     public void initialize() {
         nameCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeName"));
-        pointsAccruedCol.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("totalPointsInteger"));
-        nextFallOffDateCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("nextFallOffDate"));
-        nextFallOffAmountCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("nextFallOffAmountString"));
+        twelveMonthPointsAccruedCol.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("twelveMonthRollingTotalPointsInteger"));
+        twentyFourMonthPointsAccruedCol.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("twentyFourMonthRollingTotalPointsInteger"));
+        nextFallOffDateCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("nextTwelveMonthRollingFallOffDate"));
+        nextFallOffAmountCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("nextTwelveMonthFallOffAmountString"));
         paidSickDaysUsedCol.setCellValueFactory(new PropertyValueFactory<Employee, Double>("totalPaidSickDaysUsed"));
         unpaidSickDaysUsedCol.setCellValueFactory(new PropertyValueFactory<Employee, Double>("totalUnpaidSickDaysUsed"));
 
@@ -87,7 +90,7 @@ public class ViewController {
                     selectedEmployee.addUnpaidSickDay(sickDaysAmount, dateUsed, managerNotes);
             }
         } else {
-            System.out.println("Cancelled");
+
         }
     }
 

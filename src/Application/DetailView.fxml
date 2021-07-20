@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="412.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.DetailViewController">
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.DetailViewController">
    <bottom>
       <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="0.0" prefWidth="600.0" BorderPane.alignment="CENTER">
         <items>
@@ -16,10 +21,11 @@
    <center>
       <TableView fx:id="pointsTableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="pointsCol" prefWidth="55.0" text="Points" />
-          <TableColumn fx:id="dateReceivedCol" prefWidth="220.0" text="Date Received" />
-            <TableColumn fx:id="fallOffDateCol" minWidth="0.0" prefWidth="179.0" text="Fall Off Date" />
-            <TableColumn fx:id="managerNotesCol" prefWidth="245.0" text="Manager Notes" />
+          <TableColumn fx:id="pointsCol" prefWidth="89.60000306367874" text="Points" />
+          <TableColumn fx:id="dateReceivedCol" prefWidth="204.8000030517578" text="Date Received" />
+            <TableColumn fx:id="twelveMonthRollingFallOffDateCol" minWidth="0.0" prefWidth="253.5999755859375" text="Falloff Date (12 month)" />
+            <TableColumn fx:id="twentyFourMonthRollingFallOffDateCol" prefWidth="242.4000244140625" text="Falloff Date (24 month)" />
+            <TableColumn fx:id="managerNotesCol" prefWidth="254.40008544921875" text="Manager Notes" />
         </columns>
       </TableView>
    </center>

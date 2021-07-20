@@ -34,15 +34,19 @@ public class SQLiteDBHandler {
     public static final String UNPAIDSICKDAYS_MANAGERCOMMENTS_COLUMN = "managerComments";
 
 
-    public static Connection openConnection(){
+    public static Connection openConnection() {
 
         if(connection == null) {
             try {
-                connection = DriverManager.getConnection("jdbc:sqlite:EmployeeData.db");
+                Class.forName("org.sqlite.JDBC");
+                connection = DriverManager.getConnection(
+                        "jdbc:sqlite:C:\\Users\\david\\Documents\\GitHub\\AttendanceTracker\\sqlitedb\\EmployeeData.db");
 
             } catch (SQLException exception) {
                 exception.printStackTrace();
                 System.out.println("Unable to connect to DB");
+            } catch (ClassNotFoundException exception) {
+                exception.printStackTrace();
             }
         }
 
@@ -210,6 +214,8 @@ public class SQLiteDBHandler {
 
                 employee.addPoints(receivedAmountInt, receivedDate, managerComments);
             }
+
+            employee.removeExpiredPoints();
 
         } catch(SQLException exception) {
             exception.printStackTrace();
