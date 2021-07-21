@@ -38,15 +38,12 @@ public class SQLiteDBHandler {
 
         if(connection == null) {
             try {
-                Class.forName("org.sqlite.JDBC");
                 connection = DriverManager.getConnection(
-                        "jdbc:sqlite:C:\\Users\\david\\Documents\\GitHub\\AttendanceTracker\\sqlitedb\\EmployeeData.db");
+                        "jdbc:sqlite:C:\\sqlitedb\\EmployeeData.db");
 
             } catch (SQLException exception) {
                 exception.printStackTrace();
                 System.out.println("Unable to connect to DB");
-            } catch (ClassNotFoundException exception) {
-                exception.printStackTrace();
             }
         }
 

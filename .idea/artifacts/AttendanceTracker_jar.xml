@@ -3,6 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/AttendanceTracker_jar</output-path>
     <root id="archive" name="AttendanceTracker.jar">
       <element id="module-output" name="AttendanceTracker" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../lib/SQLite JDBC/sqlite-jdbc-3.36.0.1.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../../lib/javafx-sdk-16/lib/javafx-swt.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../../lib/javafx-sdk-16/lib/javafx.base.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../../lib/javafx-sdk-16/lib/javafx.controls.jar" path-in-jar="/" />
@@ -11,7 +12,6 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/../../lib/javafx-sdk-16/lib/javafx.media.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../../lib/javafx-sdk-16/lib/javafx.swing.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../../lib/javafx-sdk-16/lib/javafx.web.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../lib/SQLite JDBC/sqlite-jdbc-3.36.0.1.jar" path-in-jar="/" />
       <element id="dir-copy" path="$PROJECT_DIR$/../../lib/javafx-sdk-16/bin" />
     </root>
   </artifact>
