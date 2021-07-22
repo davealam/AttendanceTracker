@@ -1,6 +1,6 @@
 # AttendanceTracker
  
-First project using Java, JavaFX, and SQLite for data persistence. Application is used to track Employee sick time (both paid and unpaid), as well as attendance penalty points (for being late, missing work unexcused, etc). Per the attendance policy, points fall off on a rolling 12 month and 24 month basis. This application handles this automatically once points are entered and has an easy to use GUI.
+Attendance Manager application created using Java, JavaFX, SQLite and uses a MVC design pattern. Application is used to track Employee sick time (both paid and unpaid), as well as attendance penalty points (for being late, missing work unexcused, etc). Per the attendance policy, points fall off on a rolling 12 month and 24 month basis. This application handles this automatically once points are entered and has an easy to use GUI.
 
 Application in use:
 
